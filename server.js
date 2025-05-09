@@ -46,7 +46,12 @@ app.post('/register', async (req, res) => {
 
 app.post('/login',passport.authenticate('local', {failureRedirect: '/register',successRedirect: "/"}));
 
-
+app.get('/logout', function(req, res, next) {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
+});
 app.listen(3000, () => {
   console.log('listening on port 3000');
 });
